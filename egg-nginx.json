@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-09-13T00:38:23+08:00",
+    "name": "nginx",
+    "author": "unknown@unknown.com",
+    "description": "\u5c31\u53ea\u662f\u57fa\u65bcnginx\u8ddfphp\u5957\u4ef6\u6574\u5408\u7684\u7db2\u9801egg\u5537",
+    "features": null,
+    "images": [
+        "quay.io\/kangjwme\/p-nginx"
+    ],
+    "file_denylist": [],
+    "startup": ".\/start.sh",
+    "config": {
+        "files": "{\r\n    \"nginx\/conf.d\/default.conf\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"    listen \": \"    listen {{server.build.default.port}};\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\ncd \/mnt\/server\r\napk --update add git\r\ngit clone https:\/\/github.com\/kangjwme\/p-nginx.git .\/temp\r\ncp -r .\/temp\/nginx \/mnt\/server\/\r\ncp -r .\/temp\/php-fpm \/mnt\/server\/\r\ncp -r .\/temp\/webroot \/mnt\/server\/\r\ncp .\/temp\/start.sh \/mnt\/server\/\r\nchmod +x \/mnt\/server\/start.sh\r\nrm -rf .\/temp",
+            "container": "alpine:latest",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": []
+}
